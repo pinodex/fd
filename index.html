@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/skeleton.css" />
+    <style type="text/css">
+        body {
+            margin: 60px 0;
+        }
+
+        [v-show] {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tbody {
+            font-family: sans-serif;
+        }
+
+        h5 {
+            margin-bottom: 0;
+        }
+
+        .row + .row {
+            margin-bottom: 15px;
+        }
+
+        .sorted-data {
+            overflow-x: auto;
+        }
+
+        .sorted-data span + span {
+            margin-right: 15px;
+        }
+
+        .computed-values p {
+            margin: 0;
+        }
+    </style>
+    <title>Frequency Distribution</title>
+</head>
+<body id="app">
+    <div class="container">
+        <h2>Frequency Distribution</h2>
+        <h4>Data</h4>
+
+        <div class="row">
+            <input class="u-full-width" type="text" name="data" placeholder="e.g. 10,1,2,5,8,9" autocomplete="off" v-model="rawData" />
+        </div>
+
+        <div>
+            <div class="row">
+                <h5>Sorted data</h5>
+            
+                <div class="sorted-data">
+                    <span v-show="sortedData.length == 0">Empty set</span>
+                    <span v-for="data in sortedData" track-by="$index">{{ data }}</span>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                <div class="columns three computed-values">
+                    <h5>Computed values</h5>
+
+                    <p>n = {{ computedValues.n }}</p>
+                    <p>L = {{ computedValues.l }}</p>
+                    <p>H = {{ computedValues.h }}</p>
+                    <p>R = {{ computedValues.r }}</p>
+                    <p>k = {{ computedValues.k }}</p>
+                    <p>i = {{ computedValues.i }}</p>
+                    <p></p>
+                    <p>∑f = {{ computedValues.sumF }}</p>
+                    <p>∑x̅ = {{ computedValues.sumM }}</p>
+                    <p>∑<em>X</em> - x̅ = {{ computedValues.sumXMinXBar }}</p>
+                    <p>∑(<em>X</em> - x̅)² = {{ computedValues.sumXMinXBarSquared }}</p>
+                    <p>∑<em>f</em>(<em>X</em> - x̅)² = {{ computedValues.sumFXMinXBarSquared }}</p>
+                </div>
+
+                <div class="columns nine">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class Limit</th>
+                                <th>Class Boundaries</th>
+                                <th><em>f</em></th>
+                                <th><em>X</em></th>
+                                <th><em>fX</em></th>
+                                <th><em>X</em> - x̅</th>
+                                <th>(<em>X</em> - x̅)²</th>
+                                <th><em>f</em>(<em>X</em> - x̅)²</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr v-show="data.length == 0">
+                                <td colspan="8">Empty set</td>
+                            </tr>
+                            <tr v-for="d in data">
+                                <td>{{ d.classLimit.l }} - {{ d.classLimit.h }}</td>
+                                <td>{{ d.classBoundaries.l }} - {{ d.classBoundaries.h }}</td>
+                                <td>{{ d.f }}</td>
+                                <td>{{ d.mid }}</td>
+                                <td>{{ d.fx }}</td>
+                                <td>{{ d.XMinXBar }}</td>
+                                <td>{{ d.XMinXBarSquared }}</td>
+                                <td>{{ d.FXMinXBarSquared }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns four">
+                    <h5>Standard Deviation</h5>
+
+                    <p>To do</p>
+                </div>
+
+                <div class="columns four">
+                    <h5>Skewness</h5>
+
+                    <p>To do</p>
+                </div>
+
+                <div class="columns four">
+                    <h5>Kurtosis</h5>
+
+                    <p>To do</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/application.js"></script>
+</body>
+</html>
